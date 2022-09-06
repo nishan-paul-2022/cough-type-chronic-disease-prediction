@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block title %} Home {% endblock title%}
+{% block content %}
+
+<h1 class="display-4">Welcome, {{user.first_name.title|default:'Guest'}}</h1>
+
+<p class="lead">
+    <b>"A COUGH TYPE CHRONIC DISEASE DIAGNOSIS SYSTEM"</b>
+</p>
+
+<hr class="my-4">
+<p class="lead">
+    {% if user.is_authenticated %}
+
+    <form method="post" id="form_disease" action="appointment">
+        {% csrf_token %}
+        {% for i, j, k in formElements %}
+            <div class="custom-select">
+                <label for="_{{i}}" style="color:black;">{{j}}</label>
+                <select id="_{{i}}" name="{{i}}" required>
+                    <option>---</option>
+                    {% for m in k %}
+                        <option value="{{ forloop.counter0 }}">{{ m }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        {% endfor %}
+    </form>
+
+    <!-- Button -->
+    <button class="btn btn-dark" type="submit" form="form_disease">Submit</button>
+
+    {% endif %}
+
+{% endblock content %}

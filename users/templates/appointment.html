@@ -1,0 +1,107 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="{% static 'css/select.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    <link rel="stylesheet" href="{% static 'css/extra.css' %}">
+    <link rel="icon" href="{% static 'images/icon.png' %}" type="image/png"/>
+    <title>Appointment</title>
+</head>
+
+<body>
+    <div class="page-wrapper bg-gra-03 p-t-45 p-b-50">
+        <div class="wrapper wrapper--w790">
+            <div class="card card-5">
+                <div class="card-heading">
+                    <h4 class="title">
+                        Sorry to let you know, you are most probably suffering from <span style="color:red">{{ disease }}</span>.
+                        Fill up the form below, if you want to contact with suggested doctors.
+                    </h4>
+                </div>
+
+                <div class="card-body">
+                    <form method="post" id="form_doctor" action="doctor">
+                        {% csrf_token %}
+                        <div class="form-row m-b-55">
+                            <div class="name">Name</div>
+                            <div class="value">
+                                <div class="row row-space">
+                                    <div class="col-2">
+                                        <div class="input-group-desc">
+                                            <input class="input--style-5" type="text" name="first_name">
+                                            <label class="label--desc">first name</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-2">
+                                        <div class="input-group-desc">
+                                            <input class="input--style-5" type="text" name="last_name">
+                                            <label class="label--desc">last name</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="name">Email</div>
+                            <div class="value">
+                                <div class="input-group">
+                                    <input class="input--style-5" type="email" name="email">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-row m-b-55">
+                            <div class="name">Phone</div>
+                            <div class="value">
+                                <div class="input-group">
+                                    <input class="input--style-5" type="tel" name="phone">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="name">Location</div>
+                            <div class="value">
+                                <div class="input-group">
+                                    <input class="input--style-5" type="text" name="location">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="name">Date</div>
+                            <div class="value">
+                                <div class="input-group">
+                                    <input class="input--style-5" type="date" name="date">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-row p-t-20">
+                            <label class="label label--block">Did you make any appointment before?</label>
+                            <div class="p-t-15">
+                                <label class="radio-container m-r-55">Yes
+                                    <input type="radio" checked="checked" name="exist">
+                                    <span class="checkmark"></span>
+                                </label>
+                                <label class="radio-container">No
+                                    <input type="radio" name="exist">
+                                    <span class="checkmark"></span>
+                                </label>
+                            </div>
+                        </div>
+                        <div>
+                            <button class="btn btn--radius-2 btn--red" type="submit" form="form_doctor">Appointment</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="{% static 'js/select.min.js' %}"></script>
+    <script src="{% static 'js/global.js' %}"></script>
+</body>
+
+</html>

@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+{% block title %} Home {% endblock title%}
+{% block content %}
+{% load static %}
+
+<hr class="my-4">
+<p class="lead">
+    {% if user.is_authenticated %}
+
+	<section class="main-content">
+		<div class="container">
+			<div class="card patient_card">
+				<div class="card-body">
+					<h5 class="card-title">Patient: {{first_name}} {{last_name}}</h5>
+					<p class="card-text">
+						<address class="address">
+							Email : {{email}} <br>
+							Phone : {{phone}} <br>
+							Date : {{date}} <br>
+							Location : {{location}} <br>
+						</address>
+					</p>
+				</div>
+			</div>
+
+			<h1 class="text-center">SUGGESTED DOCTORS' PROFILE</h1>
+			<br>
+
+			<div class="row">
+
+				<div class="doctor_a">
+					<div class="profile-card card rounded-lg shadow p-4 p-xl-5 mb-4 text-center position-relative overflow-hidden">
+						<div class="banner"></div>
+						<img src="{% static 'images/doctor.png' %}" alt="" class="img-circle mx-auto mb-3">
+						<h3 class="mb-4">Prof. Dr. Khan Abul Kalam Azad</h3>
+						<div class="text-left mb-4">
+							<p class="mb-2"><i class="fa fa-envelope mr-2"></i> abulkalamazad@gmail.com</p>
+							<p class="mb-2"><i class="fa fa-phone mr-2"></i> +8809613787801</p>
+							<p class="mb-2"><i class="fa fa-map-marker-alt mr-2"></i> House # 16, Road # 2, Dhanmondi, Dhaka - 1205</p>
+							<p class="mb-2"><i class="fa fa-globe mr-2"></i> MBBS (DMC), FCPS (Medicine), MD (Internal Medicine), FACP (USA)</p>
+						</div>
+					</div>
+				</div>
+
+				<div class="doctor_b">
+					<div class="profile-card card rounded-lg shadow p-4 p-xl-5 mb-4 text-center position-relative overflow-hidden">
+						<div class="banner"></div>
+						<img src="{% static 'images/doctor.png' %}" alt="" class="img-circle mx-auto mb-3">
+						<h3 class="mb-4">Dr. Farhana Afroz Tania</h3>
+						<div class="text-left mb-4">
+							<p class="mb-2"><i class="fa fa-envelope mr-2"></i> farhana@gmail.com</p>
+							<p class="mb-2"><i class="fa fa-phone mr-2"></i> +8801301254924</p>
+							<p class="mb-2"><i class="fa fa-map-marker-alt mr-2"></i> 26/2, Principal Abul Kashem Road, Mirpur-1, Dhaka - 1216</p>
+							<p class="mb-2"><i class="fa fa-globe mr-2"></i> MBBS, FCPS (Medicine)</p>
+						</div>
+					</div>
+				</div>
+
+				<div class="doctor_b">
+					<div class="profile-card card rounded-lg shadow p-4 p-xl-5 mb-4 text-center position-relative overflow-hidden">
+						<div class="banner"></div>
+						<img src="{% static 'images/doctor.png' %}" alt="" class="img-circle mx-auto mb-3">
+						<h3 class="mb-4">Dr. Mehjabeen Tasnuva</h3>
+						<div class="text-left mb-4">
+							<p class="mb-2"><i class="fa fa-envelope mr-2"></i> mehjabeen@gmail.com</p>
+							<p class="mb-2"><i class="fa fa-phone mr-2"></i> +8801301254924</p>
+							<p class="mb-2"><i class="fa fa-map-marker-alt mr-2"></i> 1204, Madani Avenue, 100 Feet Road, Natun Bazar, Dhaka</p>
+							<p class="mb-2"><i class="fa fa-globe mr-2"></i> MBBS, MCPS (Medicine), FCPS (Medicine)</p>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</section>
+
+    {% endif %}
+
+{% endblock content %}

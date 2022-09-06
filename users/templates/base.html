@@ -1,0 +1,113 @@
+{% load static %}
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+	<link rel="stylesheet" type="text/css" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/extra.css' %}">
+    <link rel="icon" href="{% static 'images/icon.png' %}" type="image/png"/>
+    <title>{% block title %} {% endblock %}</title>
+</head>
+
+<body>
+  <div class="container bg-gra-03 p-3 my-3">
+    <div class="row">
+      <div class="col-md-12">
+        <nav class="navbar navbar-expand-md navbar-light " style="background-color: #f0f5f5">
+            <a href="/">
+              <button class="btn pmd-ripple-effect btn-primary" type="button">Home</button>
+            </a>
+
+            <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <div class="navbar-nav ml-auto">
+                  {% if user.is_authenticated %}
+                    <div style="padding: 10px;"></div>
+
+                    <button data-target="#profile-dialog" data-toggle="modal" class="btn pmd-ripple-effect btn-primary" type="button">
+                      {{ user.username }}
+                    </button>
+
+                    <div style="padding: 10px;"></div>
+
+                    <a href="{% url 'logout' %}">
+                      <button class="btn btn-secondary" type="button">Logout</button>
+                    </a>
+
+                  {% else %}
+                    <div style="padding: 10px;"></div>
+
+                    <a href="{% url 'login' %}">
+                      <button class="btn pmd-ripple-effect btn-primary" type="button">Sign in</button>
+                    </a>
+                  {% endif %}
+                </div>
+            </div>
+        </nav>
+
+        <!--Any flash messages pop up in any page because this is the base template-->
+        {% if messages %}
+          <div class="alert alert-dismissible" role="alert">
+            {% for message in messages %}
+              <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+            {% endfor %}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+        {% endif %}
+
+        {% block content %}{% endblock %}
+      </div>
+    </div>
+  </div>
+
+  <div tabindex="-1" class="modal pmd-modal fade pmd-profile-modal bg-gra-01" id="profile-dialog" style="display: none;" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content bg-gra-03 profile">
+            <div class="modal-body">
+                <div class="pmd-profile-modal-header ">
+                    <button aria-hidden="true" data-dismiss="modal" class="close" type="button"><i class="material-icons md-light pmd-xs">clear</i></button>
+                    <span class="pmd-profile-modal-header-bg-img" style="background-image:url(https://pro.propeller.in/assets/images/Keith-Dowd.png);"></span>
+                    <div class="pmd-avatar-circle">
+                        <img src="{{ user.profile.avatar.url }}" alt="profile.avatar"/>
+                    </div>
+                </div>
+
+                <div style="padding: 10px;"></div>
+
+                <div class="pmd-profile-modal-bio">
+                    <form method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Username </label>{{ user_form.username }} <br>
+                                <label>Email </label>{{ user_form.email }} <br>
+                                <label>Change Avatar </label>{{ profile_form.avatar }} <br>
+                                <label>Bio </label> {{ profile_form.bio }} <br>
+                                <a href="{% url 'password_change' %}" style="color: black;">Change Password</a> <br>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn btn-dark btn-lg">Save Changes</button>
+                        <button type="reset" class="btn btn-dark btn-lg">Reset</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/bootstrap-show-password@1.2.1/dist/bootstrap-show-password.min.js"></script>
+  <script src="{% static 'js/extra.js' %}"></script>
+</body>
+</html>

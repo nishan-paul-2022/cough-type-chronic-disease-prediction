@@ -1,0 +1,35 @@
+    <div tabindex="-1" class="modal pmd-modal fade pmd-profile-modal bg-gra-01" id="profile-dialog" style="display: none;" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content bg-gra-03 profile">
+            <div class="modal-body">
+                <div class="pmd-profile-modal-header ">
+                    <button aria-hidden="true" data-dismiss="modal" class="close" type="button"><i class="material-icons md-light pmd-xs">clear</i></button>
+                    <span class="pmd-profile-modal-header-bg-img" style="background-image:url(https://pro.propeller.in/assets/images/Keith-Dowd.png);"></span>
+                    <div class="pmd-avatar-circle">
+                        <img src="{{ user.profile.avatar.url }}" alt="profile.avatar"/>
+                    </div>
+                </div>
+
+                <div style="padding: 10px;"></div>
+
+                <div class="pmd-profile-modal-bio">
+                    <form method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Username </label>{{ user_form.username }} <br>
+                                <label>Email </label>{{ user_form.email }} <br>
+                                <label>Change Avatar </label>{{ profile_form.avatar }} <br>
+                                <label>Bio </label> {{ profile_form.bio }} <br>
+                                <a href="{% url 'password_change' %}" style="color: black;">Change Password</a> <br>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn btn-dark btn-lg">Save Changes</button>
+                        <button type="reset" class="btn btn-dark btn-lg">Reset</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
