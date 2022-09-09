@@ -5,7 +5,8 @@
 - CSS
 - JS
 - Django
-- ML 
+- PostgreSQL
+- Machine learning
 
 ## Main features of the website:
 - login / signup
